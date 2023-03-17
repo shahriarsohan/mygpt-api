@@ -1,5 +1,6 @@
 import environ
 from pathlib import Path
+from datetime import timedelta
 
 env = environ.Env()
 
@@ -10,22 +11,41 @@ DEBUG = env("DEBUG", cast=bool, default=True)
 
 ALLOWED_HOSTS = []
 
-
-
-INSTALLED_APPS = [
+CORE_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'django.contrib.sites',
+]
+LOCAL_APPS = [
     'accounts',
-    'rest_framework'
-
+    'gpt_core',
 ]
 
+THIRD_PARTY_APP = [
+    'allauth',
+    'corsheaders',
+    'allauth.account',
+    'allauth.socialaccount',
+    'rest_framework',
+    'rest_framework_simplejwt.token_blacklist',
+
+    'dj_rest_auth',
+    'rest_framework.authtoken',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+]
+
+INSTALLED_APPS = CORE_APPS + THIRD_PARTY_APP + LOCAL_APPS
+SITE_ID = 1
+
+AUTH_USER_MODEL = 'accounts.Accounts'
+
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -34,6 +54,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 ROOT_URLCONF = 'mygpt.urls'
 
@@ -55,7 +79,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mygpt.wsgi.application'
 
-
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
 
 DATABASES = {
     'default': {
@@ -78,6 +105,28 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=120),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': False,
+    'UPDATE_LAST_LOGIN': True,
+    'AUTH_HEADER_TYPES': ('Bearer', ),
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken', ),
+}
+
+REST_AUTH = {
+    'USE_JWT': True,
+    'JWT_AUTH_COOKIE': 'jwt-auth',
+    "JWT_AUTH_HTTPONLY": False,
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
 
 LANGUAGE_CODE = 'en-us'
 
@@ -86,7 +135,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 STATIC_URL = 'static/'
 
