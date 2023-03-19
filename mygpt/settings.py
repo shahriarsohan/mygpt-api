@@ -8,7 +8,7 @@ env = environ.Env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = env("SECRET_KEY", default="ewfi83f2ofee3398fh2ofno24f")
-DEBUG = env("DEBUG", cast=bool, default=True)
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CORE_APPS = [
