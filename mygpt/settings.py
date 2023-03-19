@@ -8,7 +8,7 @@ env = environ.Env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = env("SECRET_KEY", default="ewfi83f2ofee3398fh2ofno24f")
-DEBUG = True
+DEBUG = env("GPT_DEBUG", cast=bool, default=True)
 
 ALLOWED_HOSTS = ['*']
 CORE_APPS = [
@@ -85,8 +85,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "https://mygpt-client.vercel.app"
 ]
-# mygpt
-# 7I35WR0KbyW0CKZG6I2n
+CSRF_TRUSTED_ORIGINS = ["https://mygpt.redshop.tech"]
+
 
 if DEBUG:
     DATABASES = {
