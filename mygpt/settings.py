@@ -83,6 +83,7 @@ WSGI_APPLICATION = 'mygpt.wsgi.application'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://mygpt-client.vercel.app"
 ]
 # mygpt
 # 7I35WR0KbyW0CKZG6I2n

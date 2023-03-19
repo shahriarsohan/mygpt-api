@@ -13,7 +13,7 @@ class Command(BaseCommand):
         if Accounts.objects.count() == 0:
             for user in settings.ADMINS:
                 admin = Accounts.objects.create_superuser(
-                    email=env("ADMIN_EMAIL", default="admin@test.com"), password=env("ADMIN_PASSWORD", default="minda54321"))
+                    email="admin@test.com", password="minda54321")
                 admin.is_active = True
                 admin.is_admin = True
                 admin.save()
