@@ -10,7 +10,7 @@ env:
   ECR_REPOSITORY: ${{secrets.MY_ECR_REPOSITORY}}
   ECS_SERVICE: ${{secrets.MY_ECS_SERVICE}}
   ECS_CLUSTER: ${{secrets.MY_ECS_CLUSTER}}
-  ECS_TASK_DEFINITION: .aws/task-definition.json
+  ECS_TASK_DEFINITION: .aws/task-defintion.json
 
 jobs:
   deploy:
