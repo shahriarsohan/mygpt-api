@@ -60,6 +60,7 @@ AUTHENTICATION_BACKENDS = (
 
 ROOT_URLCONF = 'mygpt.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -82,6 +83,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
+# mygpt
+# 7I35WR0KbyW0CKZG6I2n
 
 if DEBUG:
     DATABASES = {
@@ -98,11 +101,11 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': env("DB_NAME", default="myproject"),
-            'USER': env("DB_USER", default="myprojectuser"),
-            'PASSWORD': env("DB_PASSWORD", default="password"),
-            'HOST': env("DB_HOST", default="127.0.0.1"),
-            'PORT': env("DB_PORT", default="5432"),
+            'NAME': env("MYDB_NAME", default="myproject"),
+            'USER': env("MY_DB_USER", default="myprojectuser"),
+            'PASSWORD': env("MY_DB_PASSWORD", default="password"),
+            'HOST': env("MY_DB_HOST", default="127.0.0.1"),
+            'PORT': env("MY_DB_PORT", default="5432"),
         },
     }
 
