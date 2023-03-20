@@ -85,7 +85,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "https://mygpt-client.vercel.app"
 ]
-CSRF_TRUSTED_ORIGINS = ["https://mygpt.redshop.tech"]
+CSRF_TRUSTED_ORIGINS = ["https://mygpt.redshop.tech/",
+                        "https://www.mygpt.redshop.tech/"]
+
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True

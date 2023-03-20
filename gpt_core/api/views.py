@@ -119,3 +119,8 @@ class MyAppToPerform(views.APIView):
         else:
             return response.Response({"err": "Something went wrong"}, status=status.HTTP_400_BAD_REQUEST)
         return response.Response({"answer": answer})
+
+
+class Test(views.APIView):
+    def get(self, request, *args, **kwargs):
+        return response.Response({"msg": "DONE!"})
