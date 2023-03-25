@@ -99,7 +99,7 @@ class MyAppToPerform(views.APIView):
         openai.api_key = app_obj.user.license_key
 
         res = openai.ChatCompletion.create(
-            model="text-davinci-003",
+            model="gpt-3.5-turbo",
             temperature=0.7,
             presence_penalty=0,
             max_tokens=256,

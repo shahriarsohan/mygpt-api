@@ -6,6 +6,7 @@ from datetime import timedelta
 env = environ.Env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 SECRET_KEY = env("SECRET_KEY", default="ewfi83f2ofee3398fh2ofno24f")
 DEBUG = env("GPT_DEBUG", cast=bool, default=True)
@@ -97,9 +98,13 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 if DEBUG:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': env("MYDB_NAME", default="myproject"),
+            'USER': env("MY_DB_USER", default="myprojectuser"),
+            'PASSWORD': env("MY_DB_PASSWORD", default="password"),
+            'HOST': env("MY_DB_HOST", default="127.0.0.1"),
+            'PORT': env("MY_DB_PORT", default="5432"),
+        },
     }
 else:
     DATABASES = {
